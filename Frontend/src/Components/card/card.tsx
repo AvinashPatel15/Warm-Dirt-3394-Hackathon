@@ -1,7 +1,7 @@
 import React from 'react';
-// Types
-import { CardType } from '../../';
-// Styles
+
+import { CardType } from '../../setup';
+
 import { Wrapper, FrontImg, BackImg } from './card.styles';
 
 type Props = {
