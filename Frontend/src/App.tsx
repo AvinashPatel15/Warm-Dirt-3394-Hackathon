@@ -7,21 +7,23 @@ import { shuffleArray } from './utils';
 import { CardType } from './setup';
 // Styles
 import { Grid } from "@chakra-ui/react"
-
 const App = () => {
   const [cards, setCards] = React.useState<CardType[]>(shuffleArray(createBoard()));
   const [gameWon, setGameWon] = React.useState(false);
   const [matchedPairs, setMatchedPairs] = React.useState(0);
   const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(undefined);
-const startTime=new Date().toTimeString()
-console.log(startTime)
+  // const startTime = Date.now()
+  // console.log(startTime)
   React.useEffect(() => {
     if (matchedPairs === cards.length / 2) {
       console.log('Game Won!');
       setGameWon(true);
     }
   }, [matchedPairs]);
-
+  // if (gameWon) {
+  //   const endTime = Date.now()
+  //   console.log("total time id ", endTime - startTime, "ms")
+  // }
   const handleCardClick = (currentClickedCard: CardType) => {
     // Flip the card
     setCards(prev =>
@@ -59,19 +61,10 @@ console.log(startTime)
 
     setClickedCard(undefined);
   };
-/**
- * templateColumns={{
-              base: `repeat(1,1fr)`,
-              sm: `repeat(2,1fr)`,
-              md: `repeat(3,1fr)`,
-              lg: `repeat(4,1fr)`,
-            }}
-            margin={"auto"}
-            gap={6}
- */
+
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"10px"}}>
-      <Grid 
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", paddingTop: "10px",backgroundImage:"url('https://media.istockphoto.com/id/1189767039/vector/hackathon-concept-card-poster-paper-art-design-vector.jpg?s=612x612&w=0&k=20&c=WDdWorasVBtvfMziuL51DjRMQRz9wVd1yPtBp1y3Ey8=')",backgroundRepeat:"no-repeat",backgroundSize:"100vh" }}>
+      <Grid
         templateRows={{
           base: `repeat(4,70px)`,
           sm: `repeat(4,140px)`,
