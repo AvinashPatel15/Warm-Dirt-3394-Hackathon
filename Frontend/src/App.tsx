@@ -1,12 +1,11 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
-
+import {Grid} from "./App.style"
 function App() {
   return (
     <>
-      <Box>Hello World!</Box>
+      <Grid>Start Here!</Grid>
     </>
   );
 }
 
-export default App;
+export default App; 
