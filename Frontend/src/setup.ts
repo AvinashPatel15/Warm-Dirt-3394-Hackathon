@@ -4,7 +4,7 @@ import card3 from './img/vscode.png';
 import card4 from './img/postman.png';
 import card5 from './img/jest.png';
 import card6 from './img/html.png';
-import card7 from './img/github.png';
+import card7 from './img/chakra.png';
 import card8 from './img/css.png';
 // Cardback
 import cardBack from './img/card_back.jpg';
