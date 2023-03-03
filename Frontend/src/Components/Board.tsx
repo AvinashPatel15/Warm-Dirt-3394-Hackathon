@@ -1,21 +1,11 @@
-<<<<<<< HEAD
+import StopWatch from "./Stop-Watch/StopWatch";
+import { useNavigate } from "react-router";
 import React, { useState } from "react";
 import Card from "./card/card";
 import { createBoard } from "../setup";
 import { shuffleArray } from "../utils";
 import { CardType } from "../setup";
-import { Box, Grid } from "@chakra-ui/react";
-import StopWatch from "./Stop-Watch/StopWatch";
-import { useNavigate } from "react-router";
-=======
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Card from './card/card';
-import { createBoard } from '../setup';
-import { shuffleArray } from '../utils';
-import { CardType } from '../setup';
-import { Box, Button, Grid, Text, useToast, WrapItem } from "@chakra-ui/react"
-
->>>>>>> b197f87909c5e053683ced104b65ba71c975377c
+import { Box, Grid, Text, useToast } from "@chakra-ui/react";
 
 const Board = () => {
   const [isRunning, setIsRunning] = useState(false);
@@ -25,20 +15,9 @@ const Board = () => {
   );
   const [gameWon, setGameWon] = React.useState(false);
   const [matchedPairs, setMatchedPairs] = React.useState(0);
-<<<<<<< HEAD
   const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(
     undefined
   );
-=======
-  const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(undefined);
-  const toast = useToast()
-  let [timer, settimer] = useState(0)
-  let startTime,endTime;
-  // console.log(startTime)
-  // setInterval(()=>{
-  //   settimer(prev=>prev+1)
-  // },1000)
->>>>>>> b197f87909c5e053683ced104b65ba71c975377c
 
   const navigate = useNavigate();
 
@@ -108,7 +87,6 @@ const Board = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div
       style={{
         display: "flex",
@@ -116,56 +94,61 @@ const Board = () => {
         paddingTop: "10px",
       }}
     >
-      <Grid
-=======
-    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center",alignItems:"center", marginTop: "85px" }}>
-      {gameWon?"":<Text fontSize={{lg:'30px',md:'30px',sm:'30px',base:'20px'}} color='tomato' as="b" paddingBottom="5px"><i> Stay Focused</i></Text>}
-      {gameWon?"":<Grid
->>>>>>> b197f87909c5e053683ced104b65ba71c975377c
-        templateRows={{
-          base: `repeat(4,70px)`,
-          sm: `repeat(4,140px)`,
-          md: `repeat(4,150px)`,
-          lg: `repeat(4,150px)`,
-        }}
-        templateColumns={{
-          base: `repeat(4,70px)`,
-          sm: `repeat(4,120px)`,
-          md: `repeat(4,150px)`,
-          lg: `repeat(4,160px)`,
-        }}
-        gap={4}
-      >
-        {cards.map((card) => (
-          <Card key={card.id} card={card} callback={handleCardClick} />
-        ))}
-<<<<<<< HEAD
+      <Grid>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "85px",
+          }}
+        >
+          {gameWon ? (
+            ""
+          ) : (
+            <Text
+              fontSize={{ lg: "30px", md: "30px", sm: "30px", base: "20px" }}
+              color="tomato"
+              as="b"
+              paddingBottom="5px"
+            >
+              <i> Stay Focused</i>
+            </Text>
+          )}
+          {gameWon ? (
+            ""
+          ) : (
+            <Grid
+              templateRows={{
+                base: `repeat(4,70px)`,
+                sm: `repeat(4,140px)`,
+                md: `repeat(4,150px)`,
+                lg: `repeat(4,150px)`,
+              }}
+              templateColumns={{
+                base: `repeat(4,70px)`,
+                sm: `repeat(4,120px)`,
+                md: `repeat(4,150px)`,
+                lg: `repeat(4,160px)`,
+              }}
+              gap={4}
+            >
+              {cards.map((card) => (
+                <Card key={card.id} card={card} callback={handleCardClick} />
+              ))}
+            </Grid>
+          )}
+          <Box marginTop={"20px"}>
+            <StopWatch
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+              elapsedTime={elapsedTime}
+              setElapsedTime={setElapsedTime}
+            />
+          </Box>
+        </div>
       </Grid>
-      <Box marginTop={"20px"}>
-        <StopWatch
-          isRunning={isRunning}
-          setIsRunning={setIsRunning}
-          elapsedTime={elapsedTime}
-          setElapsedTime={setElapsedTime}
-        />
-      </Box>
-=======
-        
-      </Grid>}
-      {/* <Box marginTop={"20px"} >
-        <Box display={"flex"} gap="20px">
-          <WrapItem>
-            <Button colorScheme='whatsapp' size='md' onClick={startGame}>START</Button>
-          </WrapItem>
-          <WrapItem>
-            <Button colorScheme='teal' size='md' onClick={restartGame}>Restart </Button>
-          </WrapItem>
-        </Box>
-        <Box>
-          {timer}
-        </Box>
-      </Box> */}
->>>>>>> b197f87909c5e053683ced104b65ba71c975377c
     </div>
   );
 };
