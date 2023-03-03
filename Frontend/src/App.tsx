@@ -1,13 +1,11 @@
-import React from 'react';
-import Board from './Components/Board';
+import React from "react";
+import Allroutes from "./Routes/Allroutes";
 
 const App = () => {
-  
-
   return (
-  <div>
-    <Board/>
-  </div>
+    <>
+      <Allroutes />
+    </>
   );
 };
 
