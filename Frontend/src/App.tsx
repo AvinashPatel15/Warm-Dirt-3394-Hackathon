@@ -1,10 +1,11 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
+import Leaderboard from "./Pages/Leaderboard";
 
 function App() {
   return (
     <>
-      <Box>Hello World!</Box>
+      <Leaderboard></Leaderboard>
     </>
   );
 }
