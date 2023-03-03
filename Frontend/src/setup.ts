@@ -6,7 +6,7 @@ import card5 from './img/jest.png';
 import card6 from './img/html.png';
 import card7 from './img/chakra.png';
 import card8 from './img/css.png';
-// Cardback
+// !Cardback
 import cardBack from './img/card_back.jpg';
 
 export type CardType = {
@@ -18,7 +18,7 @@ export type CardType = {
   matchingCardId: string;
 };
 
-// Put the images in an array
+//* Put the images in an array
 const cards: string[] = [card1, card2, card3, card4, card5, card6, card7, card8];
 
 export const createBoard = (): CardType[] =>
