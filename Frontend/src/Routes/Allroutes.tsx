@@ -13,7 +13,7 @@ const Allroutes = () => {
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/leaderboard" element={<Leaderboard />} />
       <Route path="/game" element={<Board />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login/>} />
       <Route path="/sign-up" element={<Signup />} />
       <Route path="*" element={<Error />} />
     </Routes>
