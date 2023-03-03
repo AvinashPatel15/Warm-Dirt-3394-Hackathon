@@ -3,7 +3,7 @@ import Card from './card/card';
 import { createBoard } from '../setup';
 import { shuffleArray } from '../utils';
 import { CardType } from '../setup';
-import { Box, Button, Grid, WrapItem } from "@chakra-ui/react"
+import { Box, Button, Grid, Text, useToast, WrapItem } from "@chakra-ui/react"
 
 
 const Board = () => {
@@ -11,6 +11,7 @@ const Board = () => {
   const [gameWon, setGameWon] = React.useState(false);
   const [matchedPairs, setMatchedPairs] = React.useState(0);
   const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(undefined);
+  const toast = useToast()
   let [timer, settimer] = useState(0)
   let startTime,endTime;
   // console.log(startTime)
@@ -80,28 +81,29 @@ const Board = () => {
 
   // backgroundImage:"url('https://media.istockphoto.com/id/1189767039/vector/hackathon-concept-card-poster-paper-art-design-vector.jpg?s=612x612&w=0&k=20&c=WDdWorasVBtvfMziuL51DjRMQRz9wVd1yPtBp1y3Ey8=')",backgroundRepeat:"no-repeat",backgroundSize:"100vh" 
   return (
-    <div style={{ display: "flex", justifyContent: "space-evenly", paddingTop: "10px", }}>
-      <Grid
+    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center",alignItems:"center", marginTop: "85px" }}>
+      {gameWon?"":<Text fontSize={{lg:'30px',md:'30px',sm:'30px',base:'20px'}} color='tomato' as="b" paddingBottom="5px"><i> Stay Focused</i></Text>}
+      {gameWon?"":<Grid
         templateRows={{
           base: `repeat(4,70px)`,
           sm: `repeat(4,140px)`,
-          md: `repeat(4,160px)`,
-          lg: `repeat(4,180px)`,
+          md: `repeat(4,150px)`,
+          lg: `repeat(4,150px)`,
         }}
         templateColumns={{
           base: `repeat(4,70px)`,
           sm: `repeat(4,120px)`,
-          md: `repeat(4,140px)`,
-          lg: `repeat(4,180px)`,
+          md: `repeat(4,150px)`,
+          lg: `repeat(4,160px)`,
         }}
         gap={4}
       >
         {cards.map(card => (
           <Card key={card.id} card={card} callback={handleCardClick} />
         ))}
-
-      </Grid>
-      <Box marginTop={"20px"} >
+        
+      </Grid>}
+      {/* <Box marginTop={"20px"} >
         <Box display={"flex"} gap="20px">
           <WrapItem>
             <Button colorScheme='whatsapp' size='md' onClick={startGame}>START</Button>
@@ -113,7 +115,7 @@ const Board = () => {
         <Box>
           {timer}
         </Box>
-      </Box>
+      </Box> */}
     </div>
   )
 } 
