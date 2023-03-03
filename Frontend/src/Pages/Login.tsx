@@ -89,7 +89,7 @@ const Login = () => {
                 {
                   loading ? <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></> : <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></>
                 }
-                <Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button>
+                {/* <Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button> */}
                 <Link to="/">
                   <Heading size={"sm"} _hover={{ color: "blue", textDecoration: "" }} >Create new account</Heading>
                 </Link>
