@@ -65,7 +65,7 @@ const Signup = (): JSX.Element => {
         });
         navigate("/login");
       }
-    } catch (error:any) {
+    } catch (error: any) {
       setLoading(false);
       toast({
         position: "top",
@@ -177,12 +177,16 @@ const Signup = (): JSX.Element => {
             </VStack>
           </Box>
 
-    <Box marginTop="60px" >
-    <Container maxW="5xl" p={{ base: 5, md: 10 }} >
-      <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
-        <Stack align="center" spacing={2}>
-          <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Create your account</Heading>
+          <Box marginTop="60px" >
+            <Container maxW="5xl" p={{ base: 5, md: 10 }} >
+              <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
+                <Stack align="center" spacing={2}>
+                  <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Create your account</Heading>
 
+                </Stack>
+              </Stack>
+            </Container>
+          </Box>
         </Stack>
       </Container>
     </Box>
