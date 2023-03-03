@@ -10,7 +10,6 @@ const Signup = () => {
       <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
         <Stack align="center" spacing={2}>
           <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Create your account</Heading>
-          {/* <Text fontSize={{ base: 'sm', sm: 'md' }}>Send a magic link with your email below</Text> */}
         </Stack>
         <Box pos="relative">
           <Box pos="absolute" top="-7px" right="-7px" bottom="-7px" left="-7px" rounded="lg" bgGradient="linear(to-l, #7928CA,#FF0080)" transform="rotate(-2deg)" ></Box>

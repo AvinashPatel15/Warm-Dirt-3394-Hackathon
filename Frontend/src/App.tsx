@@ -1,18 +1,11 @@
-
 import React from "react";
-import { Box } from "@chakra-ui/react";
-
-import React from 'react';
-import Board from './Components/Board';
+import Allroutes from "./Routes/Allroutes";
 
 const App = () => {
-  
-
   return (
-
-  <div>
-    <Board/>
-  </div>
+    <>
+      <Allroutes />
+    </>
   );
 };
 
