@@ -6,6 +6,7 @@ import { createBoard } from "../setup";
 import { shuffleArray } from "../utils";
 import { CardType } from "../setup";
 import { Box, Grid, Text } from "@chakra-ui/react";
+import Navbar from "./Navbar";
 
 const Board = () => {
   const [isRunning, setIsRunning] = useState(false);
@@ -87,69 +88,62 @@ const Board = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        paddingTop: "10px",
-      }}
-    >
-      <Grid>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: "85px",
-          }}
-        >
-          {gameWon ? (
-            ""
-          ) : (
-            <Text
-              fontSize={{ lg: "30px", md: "30px", sm: "30px", base: "20px" }}
-              color="tomato"
-              as="b"
-              paddingBottom="5px"
-            >
-              <i> Stay Focused</i>
-            </Text>
-          )}
-          {gameWon ? (
-            ""
-          ) : (
-            <Grid
-              templateRows={{
-                base: `repeat(4,70px)`,
-                sm: `repeat(4,140px)`,
-                md: `repeat(4,150px)`,
-                lg: `repeat(4,150px)`,
-              }}
-              templateColumns={{
-                base: `repeat(4,70px)`,
-                sm: `repeat(4,120px)`,
-                md: `repeat(4,150px)`,
-                lg: `repeat(4,160px)`,
-              }}
-              gap={4}
-            >
-              {cards.map((card) => (
-                <Card key={card.id} card={card} callback={handleCardClick} />
-              ))}
-            </Grid>
-          )}
-          <Box marginTop={"20px"}>
-            <StopWatch
-              isRunning={isRunning}
-              setIsRunning={setIsRunning}
-              elapsedTime={elapsedTime}
-              setElapsedTime={setElapsedTime}
-            />
-          </Box>
-        </div>
-      </Grid>
-    </div>
+    <>
+      <Navbar />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Grid>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {gameWon ? (
+              ""
+            ) : (
+              <Box marginY={5}>
+                <StopWatch
+                  isRunning={isRunning}
+                  setIsRunning={setIsRunning}
+                  elapsedTime={elapsedTime}
+                  setElapsedTime={setElapsedTime}
+                />
+              </Box>
+            )}
+            {gameWon ? (
+              ""
+            ) : (
+              <Grid
+                templateRows={{
+                  base: `repeat(4,70px)`,
+                  sm: `repeat(4,140px)`,
+                  md: `repeat(4,150px)`,
+                  lg: `repeat(4,150px)`,
+                }}
+                templateColumns={{
+                  base: `repeat(4,70px)`,
+                  sm: `repeat(4,120px)`,
+                  md: `repeat(4,150px)`,
+                  lg: `repeat(4,160px)`,
+                }}
+                gap={4}
+              >
+                {cards.map((card) => (
+                  <Card key={card.id} card={card} callback={handleCardClick} />
+                ))}
+              </Grid>
+            )}
+          </div>
+        </Grid>
+      </div>
+    </>
   );
 };
 
