@@ -5,7 +5,7 @@ import Card from "./card/card";
 import { createBoard } from "../setup";
 import { shuffleArray } from "../utils";
 import { CardType } from "../setup";
-import { Box, Grid, Text, useToast } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 
 const Board = () => {
   const [isRunning, setIsRunning] = useState(false);
