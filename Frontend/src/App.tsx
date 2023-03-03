@@ -1,16 +1,19 @@
+
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import Login  from "./Pages/Login";
-import Signup from "./Pages/Signup";
 
-function App() {
+import React from 'react';
+import Board from './Components/Board';
+
+const App = () => {
+  
+
   return (
-    <>
-      <Box>Hello World!</Box>
-      {/* <Login/> */}
-      <Signup/>
-    </>
+
+  <div>
+    <Board/>
+  </div>
   );
-}
+};
 
 export default App;
