@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Components/Card/Card';
+import Card from './Components/card/card';
 // Setup
 import { createBoard } from './setup';
 import { shuffleArray } from './utils';
