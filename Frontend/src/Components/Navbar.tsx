@@ -28,7 +28,7 @@ import {
     const { isOpen, onToggle } = useDisclosure();
   
     return (
-      <Box zIndex={1} position="fixed" width="100%">
+      <Box zIndex={1} top={0} position="fixed" width="100%" >
         <Flex
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
@@ -53,12 +53,15 @@ import {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-            <Text
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-              fontFamily={'heading'}
-              color={useColorModeValue('gray.800', 'white')}>
-                          <Image src={logo} width={"120px"}/>
-            </Text>
+            
+              <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              href={'/game'}>
+              <Image src={logo} width={"140px"}/>
+            </Button>
   
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
               <DesktopNav />
@@ -75,7 +78,7 @@ import {
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
+              href={'/login'}>
               Sign In
             </Button>
             <Button
@@ -85,7 +88,7 @@ import {
               fontWeight={600}
               color={'white'}
               bg={'pink.400'}
-              href={'#'}
+              href={'/sign-up'}
               _hover={{
                 bg: 'pink.300',
               }}>

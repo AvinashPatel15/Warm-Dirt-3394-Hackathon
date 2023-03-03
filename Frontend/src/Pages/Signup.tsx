@@ -5,7 +5,7 @@ import {Container,Box,FormLabel, FormControl, Input,Stack,Button,Heading,VStack,
 
 const Signup = () => {
   return (
-    <Box >
+    <Box marginTop="60px" >
     <Container maxW="5xl" p={{ base: 5, md: 10 }} >
       <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
         <Stack align="center" spacing={2}>
