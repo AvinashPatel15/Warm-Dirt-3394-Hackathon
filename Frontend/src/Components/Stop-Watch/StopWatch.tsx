@@ -1,10 +1,21 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
+import StopwatchModal from "./StopwatchModal";
 
-const StopWatch: React.FC = () => {
-  const [startTime, setStartTime] = useState(0);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+interface Props {
+  isRunning: boolean;
+  setIsRunning: React.Dispatch<React.SetStateAction<boolean>>;
+  elapsedTime: number;
+  setElapsedTime: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const StopWatch: React.FC<Props> = ({
+  isRunning,
+  setIsRunning,
+  elapsedTime,
+  setElapsedTime,
+}) => {
+  const [startTime, setStartTime] = useState<number>(0);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -20,23 +31,9 @@ const StopWatch: React.FC = () => {
     };
   }, [isRunning]);
 
-//   const handleStart = () => {
-    
-//   };
-   useEffect(() => {
+  const handleStart = () => {
     setStartTime(Date.now() - elapsedTime);
     setIsRunning(true);
-   }, [])
-   
-
-  const handleStop = () => {
-    setIsRunning(false);
-  };
-
-  const handleReset = () => {
-    setStartTime(0);
-    setElapsedTime(0);
-    setIsRunning(false);
   };
 
   const formatTime = (time: number) => {
@@ -54,20 +51,7 @@ const StopWatch: React.FC = () => {
       <Text fontSize="4xl" mb={4}>
         {formatTime(elapsedTime)}
       </Text>
-      {/* <Button colorScheme="green" onClick={handleStart} disabled={isRunning}>
-        Start
-      </Button> */}
-      <Button
-        colorScheme="red"
-        ml={4}
-        onClick={handleStop}
-        disabled={!isRunning}
-      >
-        Stop
-      </Button>
-      <Button ml={4} onClick={handleReset} disabled={elapsedTime === 0}>
-        Reset
-      </Button>
+      <StopwatchModal StartGame={handleStart} />
     </>
   );
 };
