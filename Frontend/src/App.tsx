@@ -1,3 +1,6 @@
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import Leaderboard from "./Pages/Leaderboard";
 import React from 'react';
 import Card from './Components/card/card';
 // Setup

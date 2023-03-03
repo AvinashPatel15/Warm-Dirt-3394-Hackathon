@@ -63,63 +63,63 @@ const Leaderboard = () => {
     
   return (
     <Box
-      bgImage={image}
-      bgPosition="center"
-      bgSize="cover"
-      minH="100vh"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
+  bgImage={image}
+  bgPosition="center"
+  bgSize="cover"
+  minH="100vh"
+  display="flex"
+  alignItems="center"
+  justifyContent="center"
+>
+  <Box w={{ base: "90%", md: "80%", xl: "80%" }} mx="auto">
+    <Motion.motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
     >
-      <Box w={"80%"}>
-      <Motion.motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
+      <Box
+        bg="blackAlpha.800"
+        shadow="lg"
+        rounded="lg"
+        p={{ base: 2, md: 4 }}
       >
-        <Box
-          bg="blackAlpha.800"
-          shadow="lg"
-          rounded="lg"
-          p={4}
-        >
-          <Heading color={"white"} mt={5} mb={6} textAlign="center">
-            LEADERBOARD
-          </Heading>
-          <Table variant="simple" gap={"100px"}>
-            <Thead>
-              <Tr>
-                <Th color={"white"}>Rank</Th>
-                <Th color={"white"}>Name</Th>
-                <Th color={"white"}>Total Score</Th>
-                <Th color={"white"}>Highest Score</Th>
-                <Th color={"white"}>Highest Time</Th>
+        <Heading color={"white"} mt={5} mb={6} textAlign="center" fontSize={{ base: "2xl", md: "4xl" }}>
+          LEADERBOARD
+        </Heading>
+        <Table variant="simple" gap={{ base: "20px", md: "100px" }}>
+          <Thead>
+            <Tr>
+              <Th color={"white"}>Rank</Th>
+              <Th color={"white"}>Name</Th>
+              <Th color={"white"} >Total Score</Th>
+              <Th color={"white"} display={{ base: "none", sm: "table-cell" }}>Average Time</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {leaderboardData.map((item, index) => (
+              <Tr key={index}>
+                <Td>
+                  <Badge>{index+1}</Badge>
+                </Td>
+                <Td color={"white"}>{item.name}</Td>
+                <Td color={"white"}>{item.totalScore}</Td>
+                
+                <Td color={"white"} display={{ base: "none", sm: "table-cell" }}>{item.bestTime}</Td>
               </Tr>
-            </Thead>
-            <Tbody>
-              {leaderboardData.map((item, index) => (
-                <Tr key={index}>
-                  <Td >
-                    <Badge>{item.rank}</Badge>
-                  </Td>
-                  <Td color={"white"}>{item.name}</Td>
-                  <Td color={"white"}>{item.highestScore}</Td>
-                  <Td color={"white"}>{item.totalScore}</Td>
-                  <Td color={"white"}>{item.bestTime}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-          <Flex justify="flex-end" mt={"10px"}>
-            <Text fontSize="sm" color="gray.500">
-              Updated at {d.toString()}
-            </Text>
-          </Flex>
-        </Box>
-      </Motion.motion.div>
+            ))}
+          </Tbody>
+        </Table>
+        <Flex justify="flex-end" mt={{ base: 4, md: "10px" }}>
+          <Text fontSize={{ base: "sm", md: "md" }} color="gray.500">
+            Updated at {d.toString()}
+          </Text>
+        </Flex>
       </Box>
-    </Box>
+    </Motion.motion.div>
+  </Box>
+</Box>
+
   );
 };
 
