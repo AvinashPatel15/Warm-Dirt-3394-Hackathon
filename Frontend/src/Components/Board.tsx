@@ -134,15 +134,15 @@ const Board = () => {
     <>
       <Navbar />
       <Box
-      bgImage={image}
-      bgPosition="center"
-      bgSize="cover"
+        bgImage={image}
+        bgPosition="center"
+        bgSize="cover"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
           opacity: 0.9,
         }}
-        
+
       >
         <Grid backgroundColor="rgba(0, 0, 255, 0.1)" color={"white"}>
           <div
