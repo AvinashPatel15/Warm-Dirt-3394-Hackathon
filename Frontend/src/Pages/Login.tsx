@@ -47,15 +47,15 @@ const Login = () => {
           isClosable: false,
         });
         localStorage.setItem(
-          "TeachMemoryToken",
+          "TechMemoryDatas",
           JSON.stringify({
-            token: resData.token,
             firstName: resData.first_name,
             lastName: resData.last_name,
             email: resData.email,
             admin: resData.isAdmin,
           })
         );
+        localStorage.setItem("TechToken", resData.token)
         navigate("/");
       }
     } catch (error: any) {

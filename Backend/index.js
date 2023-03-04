@@ -3,7 +3,8 @@ require("dotenv").config();
 const cors = require("cors");
 const { connection } = require("./Configs/db");
 const { userRouter } = require("./Routes/User.Route");
-const {leaderboard} = require("./Routes/Leaderboard.Route")
+const {leaderboard} = require("./Routes/Leaderboard.Route");
+const { UserAuth } = require("./Middlewares/UserAuth.Middleware");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
 app.use("/users", userRouter);
 
 /** Leaderboard Router */
-app.use("leaderboard", leaderboard)
+app.use("/leaderboard", UserAuth, leaderboard)
 
 /** For Listening The Port */
 app.listen(port, async () => {
