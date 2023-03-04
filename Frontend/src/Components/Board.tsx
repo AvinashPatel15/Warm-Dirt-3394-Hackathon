@@ -4,14 +4,15 @@ import { createBoard } from '../setup';
 import { shuffleArray } from '../utils';
 import { CardType } from '../setup';
 import { Box, Button, Grid, Text, useToast, WrapItem } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom';
 
 
 const Board = () => {
+  const navigate=useNavigate();
   const [cards, setCards] = React.useState<CardType[]>(shuffleArray(createBoard()));
   const [gameWon, setGameWon] = React.useState(false);
   const [matchedPairs, setMatchedPairs] = React.useState(0);
   const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(undefined);
-  const toast = useToast()
   let [timer, settimer] = useState(0)
   let startTime,endTime;
   // console.log(startTime)
@@ -23,6 +24,9 @@ const Board = () => {
   React.useEffect(() => {
     if (matchedPairs === cards.length / 2) {
       //? console.log('Game Won!');
+      setTimeout(()=>{
+        navigate("/gamewon");
+        },3000);
       setGameWon(true);
     }
     
@@ -82,8 +86,8 @@ const Board = () => {
   // backgroundImage:"url('https://media.istockphoto.com/id/1189767039/vector/hackathon-concept-card-poster-paper-art-design-vector.jpg?s=612x612&w=0&k=20&c=WDdWorasVBtvfMziuL51DjRMQRz9wVd1yPtBp1y3Ey8=')",backgroundRepeat:"no-repeat",backgroundSize:"100vh" 
   return (
     <div style={{ display: "flex",flexDirection:"column", justifyContent: "center",alignItems:"center", marginTop: "85px" }}>
-      {gameWon?"":<Text fontSize={{lg:'30px',md:'30px',sm:'30px',base:'20px'}} color='tomato' as="b" paddingBottom="5px"><i> Stay Focused</i></Text>}
-      {gameWon?"":<Grid
+      <Text fontSize={{lg:'30px',md:'30px',sm:'30px',base:'20px'}} color='tomato' as="b" paddingBottom="5px"><i> Stay Focused</i></Text>
+      <Grid
         templateRows={{
           base: `repeat(4,70px)`,
           sm: `repeat(4,140px)`,
@@ -102,7 +106,7 @@ const Board = () => {
           <Card key={card.id} card={card} callback={handleCardClick} />
         ))}
         
-      </Grid>}
+      </Grid>
       {/* <Box marginTop={"20px"} >
         <Box display={"flex"} gap="20px">
           <WrapItem>
