@@ -166,17 +166,15 @@ const Board = () => {
               />
             </Box>
             <Grid
-              templateRows={{
-                base: `repeat(4,70px)`,
-                sm: `repeat(4,140px)`,
-                md: `repeat(4,150px)`,
-                lg: `repeat(4,150px)`,
-              }}
+              width={{ base: "90%", md: "50%" }}
+              height={{ base: "100vh", md: "auto" }}
+              margin={"auto"}
+              templateRows={"auto"}
               templateColumns={{
-                base: `repeat(4,70px)`,
-                sm: `repeat(4,120px)`,
-                md: `repeat(4,150px)`,
-                lg: `repeat(4,160px)`,
+                base: `repeat(4,1fr)`,
+                sm: `repeat(4,1fr)`,
+                md: `repeat(4,1fr)`,
+                lg: `repeat(4,1fr)`,
               }}
               gap={4}
             >

@@ -43,7 +43,7 @@ const StopwatchModal = ({ StartGame }) => {
         <ModalContent>
           <ModalHeader>Tech Memory Game</ModalHeader>
           <ModalBody>
-            <Text>Custom backdrop filters!</Text>
+            <Text>Are You Sure You Want To Start The Game!</Text>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={handleStartGame}>
