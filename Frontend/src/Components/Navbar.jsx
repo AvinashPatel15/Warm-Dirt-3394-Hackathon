@@ -12,7 +12,6 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
   Image,
 } from "@chakra-ui/react";
@@ -23,14 +22,31 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import logo from "../assets/images/TECH_MEMORY_GAME_LOGO.png";
+import Logout from "./Logout";
+import { useState } from "react";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
+  const [refresh, setRefresh] = useState(false);
+
+  let tokenData = JSON.parse(localStorage.getItem("TeachMemoryToken")) || false;
+  let firstName = tokenData.firstName || null;
+
+  const logout = () => {
+    localStorage.clear("TeachMemoryToken");
+    window.location.reload(false);
+    setRefresh(!refresh);
+  };
 
   return (
-
-    <Box zIndex={100} top={0} position="sticky" left={0} width="100%" bg="blackAlpha.700" >
-
+    <Box
+      zIndex={100}
+      top={0}
+      position="sticky"
+      left={0}
+      width="100%"
+      bg="blackAlpha.700"
+    >
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -79,37 +95,58 @@ export default function Navbar() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"blue.400"}
-            href={"/login"}
-            _hover={{
-              bg: "blue.300",
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"/sign-up"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
+          {tokenData && (
+            <>
+              <Text
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                fontSize={20}
+                fontWeight={500}
+              >
+                {firstName}
+              </Text>
+            </>
+          )}
+
+          {tokenData ? (
+            <>
+              <Logout onClick={logout} />
+            </>
+          ) : (
+            <>
+              <Button
+                as={"a"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"blue.400"}
+                href={"/login"}
+                _hover={{
+                  bg: "blue.300",
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                as={"a"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"pink.400"}
+                href={"/sign-up"}
+                _hover={{
+                  bg: "pink.300",
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </Stack>
       </Flex>
-
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
@@ -166,7 +203,7 @@ const DesktopNav = () => {
   );
 };
 
-const DesktopSubNav = ({ label, href }: NavItem) => {
+const DesktopSubNav = ({ label, href }) => {
   return (
     <Link
       href={href}
@@ -216,7 +253,7 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -269,14 +306,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   );
 };
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
+const NAV_ITEMS = [
   {
     label: "Leaderboard",
     href: "/leaderboard",

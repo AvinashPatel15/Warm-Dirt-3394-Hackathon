@@ -8,17 +8,46 @@ import HomePage from "../Pages/Homepage";
 import Leaderboard from "../Pages/Leaderboard";
 import Login from "../Pages/Login";
 import Signup from "../Pages/Signup";
+import PrivateRoute from "./PrivateRoute";
 
-const Allroutes = () => {
+const Allroutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-      <Route path="/leaderboard" element={<Leaderboard />} />
-      <Route path="/game" element={<Board />} />
-      <Route path="/gamewon" element={<GameWon/>} />
-      <Route path="/login" element={<Login/>} />
+
+      <Route
+        path="/leaderboard"
+        element={
+          <PrivateRoute>
+            <Leaderboard />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/game"
+        element={
+          <PrivateRoute>
+            <Board />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/gamewon"
+        element={
+          <PrivateRoute>
+            <GameWon />
+          </PrivateRoute>
+        }
+      />
+
+      <Route path="/login" element={<Login />} />
+
       <Route path="/sign-up" element={<Signup />} />
+
       <Route path="*" element={<Error />} />
     </Routes>
   );
