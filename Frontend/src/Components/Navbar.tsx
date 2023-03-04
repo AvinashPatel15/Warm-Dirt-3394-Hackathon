@@ -68,7 +68,7 @@ export default function Navbar() {
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"/game"}
+            href={"/"}
           >
             <Image src={logo} width={"140px"} />
           </Button>

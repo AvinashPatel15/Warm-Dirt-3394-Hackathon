@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Container, Box, FormLabel, FormControl, Input, Stack, Button, Heading, VStack, Text, useColorModeValue, useToast,
+  Container, Box, FormLabel, FormControl, Input, Stack, Button, Heading, VStack, Text, useColorModeValue, useToast, Image,
 } from '@chakra-ui/react';
+import image from "../assets/images/bg_leaderboard.jpg"
+import logo from "../assets/images/TECH_MEMORY_GAME_LOGO.png"
 
 const Login = () => {
   const [email, setEmail] = React.useState("")
@@ -68,8 +70,13 @@ const Login = () => {
     }
   }
     return (
-      <Box bg={"black"}>
+      <Box bgImage={image}
+      bgPosition="center"
+      bgSize="cover"  height="100vh">
         <Container maxW="5xl" p={{ base: 5, md: 10 }} >
+        <Box onClick={()=> navigate("/")} bg={"white"} display="flex" justifyContent={"center"} w="30%" p={"10px"} margin={"auto"} height="150px" borderRadius={"50%"}>
+        <Image src={logo} w="60%"></Image>
+        </Box>
           <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
             <Stack align="center" spacing={2}>
               <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Sign in to your account</Heading>
@@ -90,7 +97,7 @@ const Login = () => {
                   loading ? <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></> : <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></>
                 }
                 {/* <Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button> */}
-                <Link to="/">
+                <Link to="/sign-up">
                   <Heading size={"sm"} _hover={{ color: "blue", textDecoration: "" }} >Create new account</Heading>
                 </Link>
               </VStack>
