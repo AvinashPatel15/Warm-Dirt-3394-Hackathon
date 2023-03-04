@@ -27,7 +27,7 @@ const Leaderboard = () => {
   
   const fetchPlayers = async()=> {
     try {
-      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`, {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard?sort=high`, {
         headers:{
           authorization:token
         }
