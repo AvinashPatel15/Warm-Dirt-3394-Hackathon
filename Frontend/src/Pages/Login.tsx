@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   Container, Box, FormLabel, FormControl, Input, Stack, Button, Heading, VStack, Text, useColorModeValue, useToast,
 } from '@chakra-ui/react';
-import image from "../assets/images/bg_leaderboard.jpg"
+
 const Login = () => {
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
@@ -68,9 +68,7 @@ const Login = () => {
     }
   }
     return (
-      <Box bgImage={image}
-      bgPosition="center"
-      bgSize="cover" height={"100vh"}>
+      <Box bg={"black"}>
         <Container maxW="5xl" p={{ base: 5, md: 10 }} >
           <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
             <Stack align="center" spacing={2}>
@@ -92,7 +90,7 @@ const Login = () => {
                   loading ? <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></> : <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></>
                 }
                 {/* <Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button> */}
-                <Link to="/sign-up">
+                <Link to="/">
                   <Heading size={"sm"} _hover={{ color: "blue", textDecoration: "" }} >Create new account</Heading>
                 </Link>
               </VStack>

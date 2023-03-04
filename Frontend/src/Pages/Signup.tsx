@@ -14,8 +14,6 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import image from "../assets/images/bg_leaderboard.jpg"
-
 
 const Signup = (): JSX.Element => {
   const [first_name, setFirstname] = React.useState<string>("");
@@ -80,9 +78,7 @@ const Signup = (): JSX.Element => {
   };
 
   return (
-    <Box bgImage={image}
-    bgPosition="center"
-    bgSize="cover">
+    <Box>
       <Container maxW="5xl" p={{ base: 5, md: 10 }}>
         <Stack
           spacing={4}
@@ -177,10 +173,19 @@ const Signup = (): JSX.Element => {
                   Signup
                 </Button>
               </>}
-              <Link to="/login">
-                  <Heading size={"sm"} _hover={{ color: "blue", textDecoration: "" }} >Already Have an Account? Login</Heading>
-                </Link>
+
             </VStack>
+          </Box>
+
+          <Box marginTop="60px" >
+            <Container maxW="5xl" p={{ base: 5, md: 10 }} >
+              <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
+                <Stack align="center" spacing={2}>
+                  <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Create your account</Heading>
+
+                </Stack>
+              </Stack>
+            </Container>
           </Box>
         </Stack>
       </Container>
