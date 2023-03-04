@@ -13,13 +13,13 @@ const Login = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const handleSubmit = async () => {
+    setLoading(true);
     const formData = {
       email, password
     }
-    setLoading(true);
     try {
       let res = await fetch(
-        "https://new-wave-fashion-server.cyclic.app/users/login",
+        `${process.env.REACT_APP_BACKEND_URL}/users/login`,
         {
           method: "POST",
           body: JSON.stringify(formData),
@@ -56,7 +56,7 @@ const Login = () => {
             admin: resData.isAdmin,
           })
         );
-        navigate("/game");
+        navigate("/");
       }
     } catch (error: any) {
       setLoading(false);
@@ -94,7 +94,7 @@ const Login = () => {
                   <Input type="password" placeholder="Your password" rounded="md" onChange={(e) => setPassword(e.target.value)} />
                 </FormControl>
                 {
-                  loading ? <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></> : <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></>
+                  loading ? <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} isLoading > Play now </Button></> : <><Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button></>
                 }
                 {/* <Button color="white" _hover={{ bg: 'black' }} rounded="md" w="100%" bgGradient="linear(to-l, #7928CA,#FF0080)" onClick={handleSubmit} > Play now </Button> */}
                 <Link to="/sign-up">
