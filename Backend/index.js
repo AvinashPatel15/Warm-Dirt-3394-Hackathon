@@ -18,6 +18,8 @@ app.get("/", (req, res) => {
 
 /** User Router */
 app.use("/users", userRouter);
+
+/** Leaderboard Router */
 app.use("leaderboard", leaderboard)
 
 /** For Listening The Port */
