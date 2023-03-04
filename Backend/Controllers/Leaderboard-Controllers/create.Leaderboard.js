@@ -1,10 +1,15 @@
 const LeaderboardModel = require("../../Models/Leaderboard.model");
 
-const createLeaderboard = async()=> {
-    const payload = req.body;
+const createLeaderboard = async(req,res)=> {
+    const userID = req.userID;
     try {
-        await new LeaderboardModel.create(payload);
-        res.send({message: "success", description:"Successfully created"})
+        const user = await LeaderboardModel.findOne({userID});
+        if(!user){
+            await LeaderboardModel.create({userID});
+            return res.send({message: "success", description:"Successfully created"})
+        }else{
+            return res.send({message: "failed", description:"Already created the leaderboard account"})
+        }
         
     } catch (error) {
         res.send({message:error.message})

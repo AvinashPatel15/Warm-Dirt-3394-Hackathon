@@ -1,52 +1,13 @@
 import { Box, Text, Badge, Flex, Table, Thead, Tr, Th, Tbody, Td, Heading } from "@chakra-ui/react";
 import * as Motion from "framer-motion";
+import { useEffect, useState } from "react";
 import image from "../assets/images/bg_leaderboard.jpg"
 
-type Player = {
-    rank: number;
-    name: string;
-    totalScore: number;
-    highestScore: number;
-    bestTime:number;
-  };
-
-const leaderboardData: Player[] = [
-  {
-    rank: 1,
-    name: "John Doe",
-    totalScore: 1200,
-    highestScore: 500,
-    bestTime:23
-  },
-  {
-    rank: 2,
-    name: "Jane Smith",
-    totalScore: 1200,
-    highestScore: 500,
-    bestTime:23
-  },
-  {
-    rank: 3,
-    name: "Bob Johnson",
-    totalScore: 1200,
-    highestScore: 500,
-    bestTime:23
-  },
-  {
-    rank: 4,
-    name: "Alice Williams",
-    totalScore: 1200,
-    highestScore: 500,
-    bestTime:23
-  },
-  {
-    rank: 5,
-    name: "Charlie Brown",
-    totalScore: 1200,
-    highestScore: 500,
-    bestTime:23
-  },
-];
+interface Player {
+  userID: { first_name: string };
+  win: number;
+  prevTime: number;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -58,13 +19,35 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+
 const Leaderboard = () => {
-    var d = new Date(Date.now());
-    
+  const token: string = localStorage.getItem("TechToken") as string;
+  const timer: string = localStorage.getItem("GameTime") as string;
+  const [players, setPlayers] = useState<Player[]>([]);
+  
+  const fetchPlayers = async()=> {
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`, {
+        headers:{
+          authorization:token
+        }
+      })
+      let result = await res.json();
+      setPlayers(result);
+      console.log(result)
+    } catch (error:any) {
+      console.log({message:error.message})
+    }
+  }
+  var d = new Date(Date.now());
+  
+  useEffect(() => {
+    fetchPlayers()
+  }, [token,timer])
   return (
     <Box
-  bgImage={image}
-  bgPosition="center"
+    bgImage={image}
+    bgPosition="center"
   bgSize="cover"
   minH="100vh"
   display="flex"
@@ -87,29 +70,33 @@ const Leaderboard = () => {
         <Heading color={"white"} mt={5} mb={6} textAlign="center" fontSize={{ base: "2xl", md: "4xl" }}>
           LEADERBOARD
         </Heading>
-        <Table variant="simple" gap={{ base: "20px", md: "100px" }}>
+        {
+          players.length < 1 ? <Box color={"red.400"} display={"flex"} justifyContent="center">
+            <Heading>No Data to Show</Heading>
+          </Box>:<Table variant="simple" gap={{ base: "20px", md: "100px" }}>
           <Thead>
             <Tr>
               <Th color={"white"}>Rank</Th>
               <Th color={"white"}>Name</Th>
-              <Th color={"white"} >Total Score</Th>
-              <Th color={"white"} display={{ base: "none", sm: "table-cell" }}>Average Time</Th>
+              <Th color={"white"} >Total Games Won</Th>
+              <Th color={"white"} display={{ base: "none", sm: "table-cell" }}>Previous Win Time</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {leaderboardData.map((item, index) => (
+            {players.map((item, index) => (
               <Tr key={index}>
                 <Td>
                   <Badge>{index+1}</Badge>
                 </Td>
-                <Td color={"white"}>{item.name}</Td>
-                <Td color={"white"}>{item.totalScore}</Td>
+                <Td color={"white"}>{item.userID?.first_name}</Td>
+                <Td color={"white"}>{item.win}</Td>
                 
-                <Td color={"white"} display={{ base: "none", sm: "table-cell" }}>{item.bestTime}</Td>
+                <Td color={"white"} display={{ base: "none", sm: "table-cell" }}>{item.prevTime}</Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
+        }
         <Flex justify="flex-end" mt={{ base: 4, md: "10px" }}>
           <Text fontSize={{ base: "sm", md: "md" }} color="gray.500">
             Updated at {d.toString()}

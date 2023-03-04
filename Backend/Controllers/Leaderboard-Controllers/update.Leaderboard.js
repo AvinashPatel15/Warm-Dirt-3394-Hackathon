@@ -1,15 +1,15 @@
 const LeaderboardModel = require("../../Models/Leaderboard.model");
 
-const updateLeaderboard = async()=> {
-    const payload = req.body;
+const updateLeaderboard = async(req,res)=> {
+    const {prevTime} = req.body;
     const userID = req.userID;
     try {
         const user = await LeaderboardModel.findOne({userID});
-        if(!user){
-            res.send({message: "failed", description:"Updation Failed"})
+        if(user){
+            await LeaderboardModel.findByIdAndUpdate({_id:user._id},{win:user.win+1, prevTime});
+            return res.send({message: "success", description:"Successfully updated"})
         }else{
-            await LeaderboardModel.findByIdAndUpdate({userID},payload);
-            res.send({message: "success", description:"Successfully updated"})
+            return res.send({message: "failed", description:"Updation Failed"})
         }
         
     } catch (error) {

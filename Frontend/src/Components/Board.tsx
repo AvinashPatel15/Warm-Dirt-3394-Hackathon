@@ -1,6 +1,6 @@
 import StopWatch from "./Stop-Watch/StopWatch";
 import { useNavigate } from "react-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./card/card";
 import { createBoard } from "../setup";
 import { shuffleArray } from "../utils";
@@ -12,6 +12,7 @@ import image from "../assets/images/gaming_intro.jpg"
 const Board = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [flag, setFlag]=useState(false);
   const [cards, setCards] = React.useState<CardType[]>(
     shuffleArray(createBoard())
   );
@@ -20,6 +21,7 @@ const Board = () => {
   const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(
     undefined
   );
+  const token: string = localStorage.getItem("TechToken") as string;
 
   const navigate = useNavigate();
 
@@ -32,7 +34,27 @@ const Board = () => {
       .toString()
       .padStart(2, "0")}.${milliseconds.toString().padStart(2, "0")}`;
   };
-
+  const updateWinsHandle=async()=> {
+    const token: string = localStorage.getItem("TechToken") as string;
+    const GameTime: string = localStorage.getItem("GameTime") as string;
+    const data = {
+      prevTime:GameTime
+    }
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard/update`, {
+        method:"PATCH",
+        headers:{
+          authorization:token,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+      })
+      let result = await res.json()
+      console.log(result)
+    } catch (error:any) {
+      console.log({message:error.message})
+    }
+  }
   React.useEffect(() => {
     if (matchedPairs === cards.length / 2) {
       //? console.log('Game Won!');
@@ -40,7 +62,8 @@ const Board = () => {
       setIsRunning(false);
 
       localStorage.setItem("GameTime", JSON.stringify(formatTime(elapsedTime)));
-      navigate("/leaderboard");
+      updateWinsHandle()
+      // navigate("/leaderboard");
     }
   }, [matchedPairs]);
 
@@ -88,19 +111,38 @@ const Board = () => {
     setClickedCard(undefined);
   };
 
+  const handleCreateLeaderBoard = async(token:string)=> {
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/leaderboard/add`,{
+        method:"POST",
+        headers:{
+          authorization:token
+        }
+      })
+      let result =await res.json();
+      // console.log(result);
+    } catch (error) {
+      // console.log(error);
+    }
+  }
+  useEffect(() => {
+    handleCreateLeaderBoard(token)
+  }, [token])
+  
+
   return (
     <>
       <Navbar />
       <Box
-      bgImage={image}
-      bgPosition="center"
-      bgSize="cover"
+        bgImage={image}
+        bgPosition="center"
+        bgSize="cover"
         style={{
           display: "flex",
           justifyContent: "space-evenly",
           opacity: 0.9,
         }}
-        
+
       >
         <Grid backgroundColor="rgba(0, 0, 255, 0.1)" color={"white"}>
           <div
@@ -111,9 +153,6 @@ const Board = () => {
               alignItems: "center",
             }}
           >
-            {gameWon ? (
-              ""
-            ) : (
               <Box marginY={5}>
                 <StopWatch
                   isRunning={isRunning}
@@ -122,10 +161,6 @@ const Board = () => {
                   setElapsedTime={setElapsedTime}
                 />
               </Box>
-            )}
-            {gameWon ? (
-              ""
-            ) : (
               <Grid
                 templateRows={{
                   base: `repeat(4,70px)`,
@@ -145,7 +180,6 @@ const Board = () => {
                   <Card key={card.id} card={card} callback={handleCardClick} />
                 ))}
               </Grid>
-            )}
           </div>
         </Grid>
       </Box>
