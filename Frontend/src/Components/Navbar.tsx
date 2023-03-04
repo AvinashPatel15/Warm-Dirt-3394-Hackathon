@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
 
-    <Box zIndex={100} top={0} position="fixed" width="100%" bg="blackAlpha.700" >
+    <Box zIndex={100} top={0} position="sticky" left={0} width="100%" bg="blackAlpha.700" >
 
       <Flex
         bg={useColorModeValue("white", "gray.800")}
