@@ -2,6 +2,7 @@ import { Box, Text, Badge, Flex, Table, Thead, Tr, Th, Tbody, Td, Heading } from
 import * as Motion from "framer-motion";
 import { useEffect, useState } from "react";
 import image from "../assets/images/bg_leaderboard.jpg"
+import Navbar from "../Components/Navbar";
 
 interface Player {
   userID: { first_name: string };
@@ -45,7 +46,9 @@ const Leaderboard = () => {
     fetchPlayers()
   }, [token,timer])
   return (
-    <Box
+    <Box>
+      <Navbar></Navbar>
+      <Box
     bgImage={image}
     bgPosition="center"
   bgSize="cover"
@@ -106,6 +109,7 @@ const Leaderboard = () => {
     </Motion.motion.div>
   </Box>
 </Box>
+    </Box>
 
   );
 };
