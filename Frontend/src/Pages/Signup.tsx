@@ -20,7 +20,7 @@ const Signup = (): JSX.Element => {
   const [last_name, setLastname] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const [loading, setLoading] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -89,7 +89,6 @@ const Signup = (): JSX.Element => {
             <Heading fontSize={{ base: "xl", sm: "3xl" }} color="white">
               Create your account
             </Heading>
-            {/* <Text fontSize={{ base: 'sm', sm: 'md' }}>Send a magic link with your email below</Text> */}
           </Stack>
           <Box pos="relative">
             <Box
@@ -148,41 +147,49 @@ const Signup = (): JSX.Element => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </FormControl>
-              {loading ? <>
-                <Button
-                  isLoading
-                  loadingText="Submitting"
-                  color="white"
-                  _hover={{ bg: "black" }}
-                  rounded="md"
-                  w="100%"
-                  bgGradient="linear(to-l, #7928CA,#FF0080)"
-                  onClick={handleSubmit}
-                >
-                  Signup
-                </Button>
-              </> : <>
-                <Button
-                  color="white"
-                  _hover={{ bg: "black" }}
-                  rounded="md"
-                  w="100%"
-                  bgGradient="linear(to-l, #7928CA,#FF0080)"
-                  onClick={handleSubmit}
-                >
-                  Signup
-                </Button>
-              </>}
-
+              {loading ? (
+                <>
+                  <Button
+                    isLoading
+                    loadingText="Submitting"
+                    color="white"
+                    _hover={{ bg: "black" }}
+                    rounded="md"
+                    w="100%"
+                    bgGradient="linear(to-l, #7928CA,#FF0080)"
+                    onClick={handleSubmit}
+                  >
+                    Signup
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    color="white"
+                    _hover={{ bg: "black" }}
+                    rounded="md"
+                    w="100%"
+                    bgGradient="linear(to-l, #7928CA,#FF0080)"
+                    onClick={handleSubmit}
+                  >
+                    Signup
+                  </Button>
+                </>
+              )}
             </VStack>
           </Box>
 
-          <Box marginTop="60px" >
-            <Container maxW="5xl" p={{ base: 5, md: 10 }} >
-              <Stack spacing={4} maxW={{ base: '20rem', sm: '25rem' }} margin="0 auto">
+          <Box marginTop="60px">
+            <Container maxW="5xl" p={{ base: 5, md: 10 }}>
+              <Stack
+                spacing={4}
+                maxW={{ base: "20rem", sm: "25rem" }}
+                margin="0 auto"
+              >
                 <Stack align="center" spacing={2}>
-                  <Heading fontSize={{ base: 'xl', sm: '3xl' }} color="white">Create your account</Heading>
-
+                  <Heading fontSize={{ base: "xl", sm: "3xl" }} color="white">
+                    Create your account
+                  </Heading>
                 </Stack>
               </Stack>
             </Container>
