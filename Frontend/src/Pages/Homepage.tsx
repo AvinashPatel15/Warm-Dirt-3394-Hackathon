@@ -2,6 +2,7 @@ import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Navigate, useNavigate } from "react-router-dom";
 import image from "../assets/images/TECH_MEMORY_GAME_LOGO.png";
+import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 
 const HomePage = () => {
@@ -66,6 +67,7 @@ const HomePage = () => {
           </Box>
         </Flex>
       </Box>
+      <Footer/>
     </Box>
   );
 };
