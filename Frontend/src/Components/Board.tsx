@@ -1,57 +1,42 @@
-import StopWatch from "./Stop-Watch/StopWatch";
-import { useNavigate } from "react-router";
-import React, { useState } from "react";
-import Card from "./card/card";
-import { createBoard } from "../setup";
-import { shuffleArray } from "../utils";
-import { CardType } from "../setup";
-import { Box, Grid, Text } from "@chakra-ui/react";
-import Navbar from "./Navbar";
-import image from "../assets/images/gaming_intro.jpg"
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Card from './card/card';
+import { createBoard } from '../setup';
+import { shuffleArray } from '../utils';
+import { CardType } from '../setup';
+import { Box, Button, Grid, Text, useToast, WrapItem } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom';
+
 
 const Board = () => {
-  const [isRunning, setIsRunning] = useState(false);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
-  const [cards, setCards] = React.useState<CardType[]>(
-    shuffleArray(createBoard())
-  );
+  const navigate=useNavigate();
+  const [cards, setCards] = React.useState<CardType[]>(shuffleArray(createBoard()));
   const [gameWon, setGameWon] = React.useState(false);
   const [matchedPairs, setMatchedPairs] = React.useState(0);
-  const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(
-    undefined
-  );
+  const [clickedCard, setClickedCard] = React.useState<undefined | CardType>(undefined);
+  let [timer, settimer] = useState(0)
+  let startTime,endTime;
+  // console.log(startTime)
+  // setInterval(()=>{
+  //   settimer(prev=>prev+1)
+  // },1000)
 
-  const navigate = useNavigate();
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60000);
-    const seconds = Math.floor((time % 60000) / 1000);
-    const milliseconds = Math.floor((time % 1000) / 10);
-
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}.${milliseconds.toString().padStart(2, "0")}`;
-  };
 
   React.useEffect(() => {
     if (matchedPairs === cards.length / 2) {
       //? console.log('Game Won!');
+      setTimeout(()=>{
+        navigate("/gamewon");
+        },3000);
       setGameWon(true);
-      setIsRunning(false);
-
-      localStorage.setItem("GameTime", JSON.stringify(formatTime(elapsedTime)));
-      navigate("/leaderboard");
     }
+    
   }, [matchedPairs]);
 
+  
   const handleCardClick = (currentClickedCard: CardType) => {
     //! Flip the card
-    setCards((prev) =>
-      prev.map((card) =>
-        card.id === currentClickedCard.id
-          ? { ...card, flipped: true, clickable: false }
-          : card
-      )
+    setCards(prev =>
+      prev.map(card => (card.id === currentClickedCard.id ? { ...card, flipped: true, clickable: false } : card))
     );
     //! If this is the first card that is flipped
     //! just keep it flipped
@@ -62,12 +47,10 @@ const Board = () => {
 
     //! If it's a match
     if (clickedCard.matchingCardId === currentClickedCard.id) {
-      setMatchedPairs((prev) => prev + 1);
-      setCards((prev) =>
-        prev.map((card) =>
-          card.id === clickedCard.id || card.id === currentClickedCard.id
-            ? { ...card, clickable: false }
-            : card
+      setMatchedPairs(prev => prev + 1);
+      setCards(prev =>
+        prev.map(card =>
+          card.id === clickedCard.id || card.id === currentClickedCard.id ? { ...card, clickable: false } : card
         )
       );
       setClickedCard(undefined);
@@ -76,8 +59,8 @@ const Board = () => {
 
     //! If it's not a matched pair, wait one second and flip them back
     setTimeout(() => {
-      setCards((prev) =>
-        prev.map((card) =>
+      setCards(prev =>
+        prev.map(card =>
           card.id === clickedCard.id || card.id === currentClickedCard.id
             ? { ...card, flipped: false, clickable: true }
             : card
@@ -87,70 +70,58 @@ const Board = () => {
 
     setClickedCard(undefined);
   };
+  const restartGame = () => {
+    window.location.reload();
+  }
+  const startGame=()=>{
+    startTime = new Date().getTime();
+    console.log("starting time is ",startTime)
+  }
 
+  if (gameWon) {
+    endTime = new Date().getTime();
+    console.log(`ending time is ${endTime}`)
+  }
+
+  // backgroundImage:"url('https://media.istockphoto.com/id/1189767039/vector/hackathon-concept-card-poster-paper-art-design-vector.jpg?s=612x612&w=0&k=20&c=WDdWorasVBtvfMziuL51DjRMQRz9wVd1yPtBp1y3Ey8=')",backgroundRepeat:"no-repeat",backgroundSize:"100vh" 
   return (
-    <>
-      <Navbar />
-      <Box
-      bgImage={image}
-      bgPosition="center"
-      bgSize="cover"
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          opacity: 0.9,
+    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center",alignItems:"center", marginTop: "85px" }}>
+      <Text fontSize={{lg:'30px',md:'30px',sm:'30px',base:'20px'}} color='tomato' as="b" paddingBottom="5px"><i> Stay Focused</i></Text>
+      <Grid
+        templateRows={{
+          base: `repeat(4,70px)`,
+          sm: `repeat(4,140px)`,
+          md: `repeat(4,150px)`,
+          lg: `repeat(4,150px)`,
         }}
-        
+        templateColumns={{
+          base: `repeat(4,70px)`,
+          sm: `repeat(4,120px)`,
+          md: `repeat(4,150px)`,
+          lg: `repeat(4,160px)`,
+        }}
+        gap={4}
       >
-        <Grid backgroundColor="rgba(0, 0, 255, 0.1)" color={"white"}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {gameWon ? (
-              ""
-            ) : (
-              <Box marginY={5}>
-                <StopWatch
-                  isRunning={isRunning}
-                  setIsRunning={setIsRunning}
-                  elapsedTime={elapsedTime}
-                  setElapsedTime={setElapsedTime}
-                />
-              </Box>
-            )}
-            {gameWon ? (
-              ""
-            ) : (
-              <Grid
-                templateRows={{
-                  base: `repeat(4,70px)`,
-                  sm: `repeat(4,140px)`,
-                  md: `repeat(4,150px)`,
-                  lg: `repeat(4,150px)`,
-                }}
-                templateColumns={{
-                  base: `repeat(4,70px)`,
-                  sm: `repeat(4,120px)`,
-                  md: `repeat(4,150px)`,
-                  lg: `repeat(4,160px)`,
-                }}
-                gap={4}
-              >
-                {cards.map((card) => (
-                  <Card key={card.id} card={card} callback={handleCardClick} />
-                ))}
-              </Grid>
-            )}
-          </div>
-        </Grid>
-      </Box>
-    </>
-  );
-};
+        {cards.map(card => (
+          <Card key={card.id} card={card} callback={handleCardClick} />
+        ))}
+        
+      </Grid>
+      {/* <Box marginTop={"20px"} >
+        <Box display={"flex"} gap="20px">
+          <WrapItem>
+            <Button colorScheme='whatsapp' size='md' onClick={startGame}>START</Button>
+          </WrapItem>
+          <WrapItem>
+            <Button colorScheme='teal' size='md' onClick={restartGame}>Restart </Button>
+          </WrapItem>
+        </Box>
+        <Box>
+          {timer}
+        </Box>
+      </Box> */}
+    </div>
+  )
+} 
 
-export default Board;
+export default Board
