@@ -3,15 +3,15 @@
 
 **Introduction**
 ---
-This is a Gaming Website which is created by total of four members in Hackathon in Masai in total of 48 hours. It is a Memory based game where user have to match the pairs of Tech Cards. Once user able to match all the tech cards then the time will be stored in Our Leaderboard. Leaderboard is independently dependent on to the Total number of wins.
+This is a Gaming Website which is created by a total of four members in a Hackathon in Masai in a total of 48 hours. It is a Memory-based game where users have to match the pairs of Tech Cards. Once the user is able to match all the tech cards then the time will be stored in Our Leaderboard. The leaderboard is independently dependent on the Total number of wins.
 ##  Tech-stack used
   
    ```
-   Frontend : React JS, TypeScript, Chakra-UI
+   Frontend: React JS, TypeScript, Chakra-UI
    Backend : ExpressJS, NodeJS
-   DataBase   : MongoDB
-   Frontend Deployment : Vercel
-   Backend Deployment : Cyclic
+   Database: MongoDB
+   Frontend Deployment: Vercel
+   Backend Deployment: Cyclic
    ```
  
 
@@ -20,8 +20,8 @@ This is a Gaming Website which is created by total of four members in Hackathon 
  | Serial No            | Feature                                                              |
 | ----------------- | ------------------------------------------------------------------ |
 | 1 | User signup and Login |
-| 2 | Nodemailer to verifying the real email address|
-| 3 | Homepage , Gamepage, Leaderboard|
+| 2 | Nodemailer to verify the real email address|
+| 3 | Homepage, Gamepage, Leaderboard|
 
   **Sample Page Images**
   ---
